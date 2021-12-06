@@ -5,7 +5,7 @@ using UnityEngine;
 public class DuckBehavior : TargetBehavior
 {
     private float moveSpeed = 3;
-    private float border = 2;
+    private float border = 1.5f;
 
     protected override void Move()
     {

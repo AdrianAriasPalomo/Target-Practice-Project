@@ -4,9 +4,27 @@ using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
-    public static GameManager Instance;
+    public static GameManager Instance { get; private set; }
 
-    public int score;
+    public float timeRemaining = 30;
+
+    private int m_score = 0;
+
+    public int score
+    {
+        get { return m_score; }
+        set
+        {
+            if (value < 0.0f)
+            {
+                Debug.LogError("Score can't be negative");
+            }
+            else
+            {
+                m_score = value;
+            }
+        }
+    }
 
     private void Awake()
     {
@@ -18,5 +36,13 @@ public class GameManager : MonoBehaviour
 
         Instance = this;
         DontDestroyOnLoad(gameObject);
+    }
+
+    private void Update()
+    {
+        if (timeRemaining > 0)
+        {
+            timeRemaining -= Time.deltaTime;
+        }
     }
 }
