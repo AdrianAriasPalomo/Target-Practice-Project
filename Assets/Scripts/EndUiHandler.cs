@@ -22,6 +22,7 @@ public class EndUiHandler : MonoBehaviour
 
     public void Exit()
     {
+        GameManager.Instance.SaveHighScore();
 #if UNITY_EDITOR
         EditorApplication.ExitPlaymode();
 #else

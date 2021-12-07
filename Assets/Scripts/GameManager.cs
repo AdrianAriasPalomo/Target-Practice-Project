@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using System.IO;
 
 public class GameManager : MonoBehaviour
 {
@@ -55,6 +56,7 @@ public class GameManager : MonoBehaviour
 
         Instance = this;
         DontDestroyOnLoad(gameObject);
+        LoadHighScore();
     }
 
     private void Update()
@@ -63,7 +65,7 @@ public class GameManager : MonoBehaviour
     }
 
     private void ManageTimer()
-    {
+    {     
         if (timeRemaining > 0 && SceneManager.GetActiveScene().name == "Main")
         {
             timeRemaining -= Time.deltaTime;
@@ -72,6 +74,35 @@ public class GameManager : MonoBehaviour
         {
             timeRemaining = 30;
             SceneManager.LoadScene(2);
+        }
+    }
+
+    // Implement data persistence between sessions
+    [System.Serializable]
+    class SaveData
+    {
+        public int highScore;
+    }
+
+    public void SaveHighScore()
+    {
+        SaveData data = new SaveData();
+        data.highScore = highScore;
+
+        string json = JsonUtility.ToJson(data);
+
+        File.WriteAllText(Application.persistentDataPath + "/savefile.json", json);
+    }
+
+    public void LoadHighScore()
+    {
+        string path = Application.persistentDataPath + "/savefile.json";
+        if (File.Exists(path))
+        {
+            string json = File.ReadAllText(path);
+            SaveData data = JsonUtility.FromJson<SaveData>(json);
+
+            highScore = data.highScore;
         }
     }
 }
