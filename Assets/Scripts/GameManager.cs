@@ -10,6 +10,7 @@ public class GameManager : MonoBehaviour
 
     public float timeRemaining = 30;
 
+    // ENCAPSULATION
     private int m_score = 0;
 
     public int score
@@ -28,6 +29,7 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    // ENCAPTULATION
     private int m_highScore;
 
     public int highScore
@@ -64,6 +66,7 @@ public class GameManager : MonoBehaviour
         ManageTimer();
     }
 
+    // ABSTRACTION
     private void ManageTimer()
     {     
         if (timeRemaining > 0 && SceneManager.GetActiveScene().name == "Main")

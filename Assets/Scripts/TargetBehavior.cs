@@ -27,6 +27,7 @@ public class TargetBehavior : MonoBehaviour
         GoToRandomPosition();
     }
 
+    // ABSTRACTION
     private Vector2 GenerateRandomPosition()
     {
         float randomXPos = Random.Range(-7, 7);
@@ -34,12 +35,14 @@ public class TargetBehavior : MonoBehaviour
         return new Vector2(randomXPos, randomYPos);
     }
 
+    // ABSTRACTION
     private void GoToRandomPosition()
     {
         originalPos = GenerateRandomPosition();
         transform.position = originalPos;
     }
 
+    // ABSTRACTION
     private void CheckHighScore()
     {
         if (GameManager.Instance.score >= GameManager.Instance.highScore)
@@ -48,6 +51,7 @@ public class TargetBehavior : MonoBehaviour
         }
     }
 
+    // ABSTRACTION
     protected virtual void Move()
     {
         // Moves target in a circle

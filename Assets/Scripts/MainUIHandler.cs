@@ -17,6 +17,7 @@ public class MainUIHandler : MonoBehaviour
         UpdateText();
     }
 
+    // ABSTRACTION
     void UpdateText()
     {
         string currentScore = GameManager.Instance.score.ToString();

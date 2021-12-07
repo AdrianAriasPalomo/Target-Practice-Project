@@ -8,6 +8,8 @@ using UnityEditor;
 
 public class EndUiHandler : MonoBehaviour
 {
+
+    // ABSTRACTION
     public void StartGame()
     {
         GameManager.Instance.score = 0;
@@ -15,11 +17,13 @@ public class EndUiHandler : MonoBehaviour
         SceneManager.LoadScene(1);
     }
 
+    // ABSTRACTION
     public void GotoMenu()
     {
         SceneManager.LoadScene(0);
     }
 
+    // ABSTRACTION
     public void Exit()
     {
         GameManager.Instance.SaveHighScore();
