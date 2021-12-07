@@ -3,10 +3,12 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using UnityEngine.SceneManagement;
 
 public class MainUIHandler : MonoBehaviour
 {
     [SerializeField] private TextMeshProUGUI scoreText;
+    [SerializeField] private TextMeshProUGUI highScoreText;
     [SerializeField] private TextMeshProUGUI timeText;
 
     // Update is called once per frame
@@ -18,10 +20,16 @@ public class MainUIHandler : MonoBehaviour
     void UpdateText()
     {
         string currentScore = GameManager.Instance.score.ToString();
-        int roundedTime = (int)Mathf.Round(GameManager.Instance.timeRemaining);
-        string currentTime = roundedTime.ToString();
-
+        string currentHighScore = GameManager.Instance.highScore.ToString();
+        
         scoreText.text = currentScore;
-        timeText.text = currentTime;
+        highScoreText.text = currentHighScore;
+
+        if (SceneManager.GetActiveScene().name == "Main")
+        {
+            int roundedTime = (int)Mathf.Round(GameManager.Instance.timeRemaining);
+            string currentTime = roundedTime.ToString();
+            timeText.text = currentTime;
+        }
     }
 }

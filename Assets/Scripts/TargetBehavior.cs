@@ -4,8 +4,6 @@ using UnityEngine;
 
 public class TargetBehavior : MonoBehaviour
 {
-    protected int value = 1;
-
     private float RotateSpeed = 3f;
     private float Radius = 0.8f;
 
@@ -17,15 +15,15 @@ public class TargetBehavior : MonoBehaviour
         GoToRandomPosition();
     }
 
-    private void Update()
+    private void FixedUpdate()
     {
         Move();
     }
 
     private void OnMouseDown()
     {
-        GameManager.Instance.score += value;
-        Debug.Log(GameManager.Instance.score);
+        GameManager.Instance.score ++;
+        CheckHighScore();
         GoToRandomPosition();
     }
 
@@ -40,6 +38,14 @@ public class TargetBehavior : MonoBehaviour
     {
         originalPos = GenerateRandomPosition();
         transform.position = originalPos;
+    }
+
+    private void CheckHighScore()
+    {
+        if (GameManager.Instance.score >= GameManager.Instance.highScore)
+        {
+            GameManager.Instance.highScore = GameManager.Instance.score;
+        }
     }
 
     protected virtual void Move()
